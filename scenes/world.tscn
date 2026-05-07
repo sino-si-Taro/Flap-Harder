@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bt0aeud7b18rl" path="res://assets/border.png" id="7_4mrxx"]
 [ext_resource type="AudioStream" uid="uid://drnlu3o2t0i6" path="res://assets/edr-8-bit-jump-001-171817.mp3" id="7_w7kh3"]
 [ext_resource type="AudioStream" uid="uid://407g0517tfhl" path="res://assets/dragon-studio-deep-animalistic-rumbling-472370.mp3" id="9_7r4gi"]
-[ext_resource type="AudioStream" uid="uid://dc0nwxfsypsrw" path="res://assets/xDeviruchi - Decisive Battle (Loop).wav" id="10_e3hyu"]
-[ext_resource type="AudioStream" uid="uid://boocuf8bgvfak" path="res://assets/xDeviruchi - Prepare for Battle! (Loop).wav" id="11_q5onr"]
 [ext_resource type="PackedScene" uid="uid://b0l3a6p60ahfr" path="res://scenes/pause_screen.tscn" id="13_jhx03"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
@@ -174,10 +172,8 @@ _data = {
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q5onr"]
-streams_count = 3
+streams_count = 1
 stream_0/stream = ExtResource("6_e3hyu")
-stream_1/stream = ExtResource("10_e3hyu")
-stream_2/stream = ExtResource("11_q5onr")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7r4gi"]
 playback_mode = 1
