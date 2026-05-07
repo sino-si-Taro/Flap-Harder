@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://b0l3a6p60ahfr"]
+
+[ext_resource type="Texture2D" uid="uid://but1yn6tkmj27" path="res://assets/Icons.png" id="1_gchx3"]
+[ext_resource type="Script" uid="uid://bku8146gqmtjf" path="res://scripts/pause_screen.gd" id="1_qeunj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeunj"]
+atlas = ExtResource("1_gchx3")
+region = Rect2(64.80002, 0, 31.199982, 32)
+
+[node name="Pause_screen" type="Control" unique_id=1420518618]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_qeunj")
+
+[node name="NotPaused" type="Control" parent="." unique_id=113072743]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="PauseBtn" type="Button" parent="NotPaused" unique_id=802257156]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_top = 48.0
+offset_right = -137.0
+offset_bottom = 88.0
+grow_horizontal = 0
+scale = Vector2(3, 3)
+theme_override_font_sizes/font_size = 21
+icon = SubResource("AtlasTexture_qeunj")
+flat = true
+
+[node name="Paused" type="Control" parent="." unique_id=547915876]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeBtn" type="Button" parent="Paused" unique_id=1126693510]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Tap to Continue"
+
+[node name="Label" type="Label" parent="Paused" unique_id=597545923]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -180.0
+offset_right = 113.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Paused"
+
+[connection signal="pressed" from="NotPaused/PauseBtn" to="." method="_on_pause_btn_pressed"]
+[connection signal="pressed" from="Paused/ResumeBtn" to="." method="_on_resume_btn_pressed"]

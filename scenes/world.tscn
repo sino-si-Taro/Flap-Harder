@@ -1,0 +1,349 @@
+[gd_scene format=3 uid="uid://jmqlrvoihgd4"]
+
+[ext_resource type="Script" uid="uid://8vagnc14chwh" path="res://scripts/world.gd" id="1_qfnet"]
+[ext_resource type="PackedScene" uid="uid://bqbu4d2emt1bu" path="res://scenes/bullet.tscn" id="2_4mrxx"]
+[ext_resource type="Script" uid="uid://b741ea3t85ho6" path="res://scripts/player.gd" id="2_i7141"]
+[ext_resource type="Texture2D" uid="uid://bbnsehjbq4130" path="res://assets/Player.jpg" id="3_4mrxx"]
+[ext_resource type="Texture2D" uid="uid://c4xdjrm5gdsn1" path="res://assets/Light.png" id="4_7r4gi"]
+[ext_resource type="AudioStream" uid="uid://651aw8pjnpf3" path="res://assets/xDeviruchi - The Icy Cave (End).wav" id="5_w7kh3"]
+[ext_resource type="AudioStream" uid="uid://j8wqwxv2falk" path="res://assets/xDeviruchi - Exploring The Unknown.wav" id="6_e3hyu"]
+[ext_resource type="Texture2D" uid="uid://bt0aeud7b18rl" path="res://assets/border.png" id="7_4mrxx"]
+[ext_resource type="AudioStream" uid="uid://drnlu3o2t0i6" path="res://assets/edr-8-bit-jump-001-171817.mp3" id="7_w7kh3"]
+[ext_resource type="AudioStream" uid="uid://407g0517tfhl" path="res://assets/dragon-studio-deep-animalistic-rumbling-472370.mp3" id="9_7r4gi"]
+[ext_resource type="AudioStream" uid="uid://dc0nwxfsypsrw" path="res://assets/xDeviruchi - Decisive Battle (Loop).wav" id="10_e3hyu"]
+[ext_resource type="AudioStream" uid="uid://boocuf8bgvfak" path="res://assets/xDeviruchi - Prepare for Battle! (Loop).wav" id="11_q5onr"]
+[ext_resource type="PackedScene" uid="uid://b0l3a6p60ahfr" path="res://scenes/pause_screen.tscn" id="13_jhx03"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sweqy"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tlwt5"]
+normal = Vector2(1, 0)
+
+[sub_resource type="Curve" id="Curve_036b0"]
+_data = [Vector2(0.038135596, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.13422585), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_aqk2v"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/NinePatchRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/NinePatchRect:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player/PointLight2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pkg7o"]
+resource_name = "rotate_180"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.5707963267948966, -3.1415927]
+}
+
+[sub_resource type="Animation" id="Animation_dwbse"]
+resource_name = "rotate45"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.7853982]
+}
+
+[sub_resource type="Animation" id="Animation_036b0"]
+resource_name = "rotate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.7853981633974483, -1.5707963267948966]
+}
+
+[sub_resource type="Animation" id="Animation_7r4gi"]
+resource_name = "warning"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/NinePatchRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/NinePatchRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.2, 1.4, 1.6, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player/PointLight2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.73333335, 0.8666667, 1, 1.1333333, 1.2666667, 1.4000001, 1.5333333, 1.6333333, 1.7333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [true, false, true, false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dwbse"]
+_data = {
+&"RESET": SubResource("Animation_aqk2v"),
+&"rotate180": SubResource("Animation_pkg7o"),
+&"rotate45": SubResource("Animation_dwbse"),
+&"rotate90": SubResource("Animation_036b0"),
+&"warning": SubResource("Animation_7r4gi")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q5onr"]
+streams_count = 3
+stream_0/stream = ExtResource("6_e3hyu")
+stream_1/stream = ExtResource("10_e3hyu")
+stream_2/stream = ExtResource("11_q5onr")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7r4gi"]
+playback_mode = 1
+streams_count = 1
+stream_0/stream = ExtResource("9_7r4gi")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dwbse"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pkg7o"]
+
+[node name="World" type="Node2D" unique_id=2146260601 node_paths=PackedStringArray("mysterious_noise", "anim", "reset_timer")]
+script = ExtResource("1_qfnet")
+bullet_scene = ExtResource("2_4mrxx")
+mysterious_noise = NodePath("MysteriousNoise")
+anim = NodePath("AnimationPlayer")
+reset_timer = NodePath("Player/ResetTimer")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1797201540]
+offset_left = -1056.0
+offset_top = -664.0
+offset_right = 1200.0
+offset_bottom = 832.0
+color = Color(0.120542444, 0.0345052, 0.24819112, 1)
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=413540365]
+script = ExtResource("2_i7141")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=265630744]
+shape = SubResource("RectangleShape2D_hqtel")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1098829262]
+texture = ExtResource("3_4mrxx")
+
+[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=1545774255]
+scale = Vector2(7, 7)
+energy = 1.42
+shadow_enabled = true
+texture = ExtResource("4_7r4gi")
+
+[node name="Detect" type="Area2D" parent="Player" unique_id=721208093]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Detect" unique_id=387419975]
+shape = SubResource("RectangleShape2D_sweqy")
+
+[node name="Resetter" type="Area2D" parent="Player" unique_id=1445620965]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Resetter" unique_id=1237860734]
+position = Vector2(-456, 0)
+shape = SubResource("WorldBoundaryShape2D_tlwt5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Player" unique_id=2062838395]
+emitting = false
+amount = 25
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 70.0
+initial_velocity_max = 150.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_036b0")
+
+[node name="ResetTimer" type="Timer" parent="Player" unique_id=1640281300]
+wait_time = 0.5
+
+[node name="Death" type="AudioStreamPlayer" parent="Player" unique_id=687469733]
+stream = ExtResource("5_w7kh3")
+volume_db = -5.0
+pitch_scale = 1.35
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Player" unique_id=821003416]
+stream = ExtResource("7_w7kh3")
+volume_db = -20.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=550579584]
+ignore_rotation = false
+zoom = Vector2(1.5, 1.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1444357590]
+
+[node name="Score" type="Label" parent="CanvasLayer" unique_id=1146438307]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_top = 72.0
+offset_right = 21.0
+offset_bottom = 95.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Score : 0"
+
+[node name="BestScore" type="Label" parent="CanvasLayer" unique_id=1586301408]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 120.0
+offset_right = 48.0
+offset_bottom = 143.0
+grow_horizontal = 2
+text = "Best : --"
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1280661098]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=1413664384]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="Pause_screen" parent="CanvasLayer" unique_id=1614725412 instance=ExtResource("13_jhx03")]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer" unique_id=1421821695]
+visible = false
+modulate = Color(0.6802819, 0.29349765, 0.46557635, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_4mrxx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1222194192]
+libraries/ = SubResource("AnimationLibrary_dwbse")
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="." unique_id=1433925780]
+stream = SubResource("AudioStreamRandomizer_q5onr")
+autoplay = true
+
+[node name="MysteriousNoise" type="AudioStreamPlayer2D" parent="." unique_id=40002130]
+stream = SubResource("AudioStreamRandomizer_7r4gi")
+volume_db = -5.416
+pitch_scale = 1.43
+
+[node name="WorldBorder" type="StaticBody2D" parent="." unique_id=337920807 groups=["Walls"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder" unique_id=79754682]
+position = Vector2(-1, -209)
+rotation = 3.1415925
+shape = SubResource("WorldBoundaryShape2D_dwbse")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldBorder" unique_id=2057064721]
+position = Vector2(-1, 208)
+shape = SubResource("WorldBoundaryShape2D_pkg7o")
+
+[node name="Timer" type="Timer" parent="." unique_id=23180698]
+autostart = true
+
+[connection signal="player_collision" from="." to="Player" method="_on_world_player_collision"]
+[connection signal="area_entered" from="Player/Detect" to="." method="_on_detect_area_entered"]
+[connection signal="body_entered" from="Player/Detect" to="." method="_on_detect_body_entered"]
+[connection signal="body_entered" from="Player/Resetter" to="." method="_on_resetter_body_entered"]
+[connection signal="timeout" from="Player/ResetTimer" to="." method="_on_reset_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="Player" method="_on_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

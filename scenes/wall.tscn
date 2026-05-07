@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://dddjxw4a0q328"]
+
+[ext_resource type="Script" uid="uid://ddm0ktsidx0ag" path="res://scripts/wall.gd" id="1_2ktk7"]
+[ext_resource type="Texture2D" uid="uid://bbnsehjbq4130" path="res://assets/Player.jpg" id="2_e00m8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xduj2"]
+size = Vector2(16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bbgl8"]
+polygon = PackedVector2Array(-16, -360, -16, -40, 16, -40, 16, -360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dy4dl"]
+size = Vector2(10, 80)
+
+[sub_resource type="Animation" id="Animation_y4f30"]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LowerWallSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 240), Vector2(0, 280)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpperWallSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -240), Vector2(0, -280)]
+}
+
+[sub_resource type="Animation" id="Animation_iuee5"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LowerWallSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 240), Vector2(0, 280)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpperWallSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -240), Vector2(0, -280)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xduj2"]
+_data = {
+&"RESET": SubResource("Animation_y4f30"),
+&"open": SubResource("Animation_iuee5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4f30"]
+size = Vector2(11.230769, 47.69231)
+
+[node name="Walls" type="StaticBody2D" unique_id=536599108 groups=["Walls"]]
+script = ExtResource("1_2ktk7")
+
+[node name="UpperWallSprite" type="Sprite2D" parent="." unique_id=2068784815]
+position = Vector2(0, -240)
+scale = Vector2(2, 30)
+texture = ExtResource("2_e00m8")
+
+[node name="UpperWallCol" type="CollisionShape2D" parent="." unique_id=217690809]
+position = Vector2(0, -200)
+scale = Vector2(2, 20)
+shape = SubResource("RectangleShape2D_xduj2")
+
+[node name="UpperLightOccluder2D" type="LightOccluder2D" parent="." unique_id=1930710672]
+occluder = SubResource("OccluderPolygon2D_bbgl8")
+
+[node name="LowerWallSprite" type="Sprite2D" parent="." unique_id=1358006500]
+position = Vector2(0, 240)
+scale = Vector2(2, 30)
+texture = ExtResource("2_e00m8")
+
+[node name="LowerWallCol" type="CollisionShape2D" parent="." unique_id=160646626]
+position = Vector2(0, 200)
+scale = Vector2(2, 20)
+shape = SubResource("RectangleShape2D_xduj2")
+
+[node name="LowerLightOccluder2D" type="LightOccluder2D" parent="." unique_id=2059589864]
+position = Vector2(0, 400)
+occluder = SubResource("OccluderPolygon2D_bbgl8")
+
+[node name="PointArea" type="Area2D" parent="." unique_id=832885959]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointArea" unique_id=471960321]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_dy4dl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2076307856]
+libraries/ = SubResource("AnimationLibrary_xduj2")
+
+[node name="Detect" type="Area2D" parent="." unique_id=317930463]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect" unique_id=1338149739]
+position = Vector2(-57, -1.5258789e-05)
+scale = Vector2(13, 13)
+shape = SubResource("RectangleShape2D_y4f30")
+
+[connection signal="body_entered" from="Detect" to="." method="_on_detect_body_entered"]

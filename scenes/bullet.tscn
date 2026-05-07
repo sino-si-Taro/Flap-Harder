@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://bqbu4d2emt1bu"]
+
+[ext_resource type="Script" uid="uid://qjaq2xa5s6cg" path="res://scripts/bullet.gd" id="1_y25gk"]
+[ext_resource type="Texture2D" uid="uid://bbnsehjbq4130" path="res://assets/Player.jpg" id="2_l5glv"]
+
+[sub_resource type="Animation" id="Animation_2b2rl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Warning:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_b7duk"]
+resource_name = "warning"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Warning:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t2bd8"]
+_data = {
+&"RESET": SubResource("Animation_2b2rl"),
+&"warning": SubResource("Animation_b7duk")
+}
+
+[sub_resource type="Curve" id="Curve_y25gk"]
+_data = [Vector2(0.029661022, 1), 0.0, 0.0, 0, 0, Vector2(0.9957627, 0.08959842), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0pa3"]
+size = Vector2(20, 12)
+
+[node name="Bullet" type="StaticBody2D" unique_id=1000156853 groups=["Bullets"]]
+script = ExtResource("1_y25gk")
+
+[node name="Warning" type="Sprite2D" parent="." unique_id=2140660666]
+modulate = Color(0.94509804, 0.09411765, 0.32941177, 1)
+self_modulate = Color(1, 1, 1, 0.47058824)
+scale = Vector2(2, 2)
+texture = ExtResource("2_l5glv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=913054381]
+libraries/ = SubResource("AnimationLibrary_t2bd8")
+
+[node name="Bullet" type="Sprite2D" parent="." unique_id=807147050]
+visible = false
+position = Vector2(61, 0)
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_l5glv")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Bullet" unique_id=553859988]
+lifetime = 0.5
+gravity = Vector2(0, 0)
+initial_velocity_max = 40.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_y25gk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=24750235]
+position = Vector2(61, 0)
+shape = SubResource("RectangleShape2D_h0pa3")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
